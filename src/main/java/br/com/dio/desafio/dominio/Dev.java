@@ -1,5 +1,6 @@
 package br.com.dio.desafio.dominio;
 
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -12,6 +13,11 @@ public class Dev {
     private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
 
     public void inscreverBootcamp(Bootcamp bootcamp){
+
+        if (LocalDate.now().compareTo(bootcamp.getDataFinal()) > 0){
+            System.err.println("Erro Bootcamp fechado");
+            return;
+        }
         // O dev recebe todos os conteudos dos bootcamp inscrito
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
         // Adicionar o Dev ao bootcamp
